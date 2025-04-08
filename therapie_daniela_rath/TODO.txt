@@ -1,0 +1,2 @@
+index.html-> Bilder carousel -> "Alt text hinzufügen"
+Animated info is not working
