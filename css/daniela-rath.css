@@ -3,7 +3,7 @@
 -----------------------------------------*/
 :root {
   --white-color: #ffffff;
-  --primary-color: #247cff;
+  --primary-color: #b77e55;
   --section-bg-color: #f7f1e5;
   --dark-color: #000000;
   --title-color: #565758;
@@ -168,15 +168,20 @@ a:hover {
 }
 
 /*---------------------------------------
-  ANIMATED TEXT SOLUTION - UPDATED
+  ANIMATED TEXT SOLUTION 
 -----------------------------------------*/
 .heroText h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   line-height: 1.2;
   margin-bottom: 0.5rem;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: center; /* Align items vertically */
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+.heroText h1 span {
+  display: inline-flex; /* Ensure the animated items stay inline */
+  gap: 0.5rem; /* Add spacing between items */
 }
 
 .heroText h1 .animated-info {
@@ -184,44 +189,34 @@ a:hover {
   position: relative;
   margin-left: 8px;
   color: var(--primary-color);
-  height: 1.2em;
+  height: auto;
   overflow: hidden;
-  vertical-align: middle;
 }
 
 .heroText h1 .animated-item {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  animation: BottomTotop 6s linear infinite;
+  display: inline-block;
+  position: absolute; 
+  height: auto;
+  margin-left: 0.5rem;
+  overflow: hidden;
+  color: var(--primary-color);
+  opacity: 0; /* Start hidden */
+  animation: fadeInOut 6s linear infinite; /* Cycle through items */
+  transform: translateY(20px); /* Start off-screen */
 }
 
 .heroText h1 .animated-item:nth-child(1) { animation-delay: 0s; }
 .heroText h1 .animated-item:nth-child(2) { animation-delay: 2s; }
 .heroText h1 .animated-item:nth-child(3) { animation-delay: 4s; }
 
-@keyframes BottomTotop {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
+@keyframes fadeInOut {
+  0%, 20% {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* In position */
   }
-  5% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  25% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  30% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px);
+  25%, 100% {
+    opacity: 0; /* Fade out */
+    transform: translateY(-20px); /* Move off-screen */
   }
 }
 
@@ -260,10 +255,16 @@ a:hover {
     background: rgba(247, 241, 229, 0.9);
   }
 }
+.hero-collapsible {
+  -webkit-line-clamp: 5; /* Show 5 lines by default */
+}
 
+/* Über mich Collapsible */
+.about-collapsible {
+  -webkit-line-clamp: 12; /* Show 12 lines by default */
+}
 .collapsible-text {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -278,6 +279,7 @@ a:hover {
 .read-more-btn {
   background: none;
   border: none;
+  font-size: 0.8rem;
   color: var(--p-color);
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
@@ -364,8 +366,9 @@ a:hover {
 }
 
 .navbar-nav .logo-item {
-  margin: 0 1.5rem;
+  margin-right: auto;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -533,6 +536,71 @@ a:hover {
 }
 
 /*---------------------------------------
+  CONTACT SECTION
+-----------------------------------------*/
+#contact .label {
+  display: inline-block; /* Keep the label on one line */
+  width: 100px; /* Set a fixed width for alignment */
+  font-weight: bold; /* Ensure bold text */
+  vertical-align: top; /* Align labels to the top */
+}
+
+#contact p {
+  margin: 0.5rem 0; /* Add spacing between lines */
+  font-size: 1rem; /* Adjust font size */
+  color: var(--dark-color); /* Use your theme's text color */
+}
+
+#contact p span {
+  display: inline-block; /* Ensure proper alignment */
+}
+
+#contact a {
+  color: var(--primary-color); /* Style links */
+  text-decoration: none;
+}
+
+#contact a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+/*---------------------------------------
+  IMPRESSUM SECTION
+-----------------------------------------*/
+.impressum h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+}
+
+.impressum p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.impressum a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.impressum a:hover {
+    text-decoration: underline;
+}
+
+.impressum .row {
+    border-top: 1px solid var(--light-color);
+    border-bottom: 1px solid var(--light-color);
+    padding: 1.5rem 0;
+}
+
+.impressum .col-lg-6 {
+    padding: 0 1rem;
+}
+
+/*---------------------------------------
   RESPONSIVE STYLES
 -----------------------------------------*/
 @media screen and (max-width: 991px) {
@@ -566,7 +634,6 @@ a:hover {
 
   .heroText h1 {
     font-size: 1.6rem;
-    justify-content: center;
   }
 
   .animated-info {
@@ -585,6 +652,9 @@ a:hover {
     font-size: 12px;
     line-height: 30px;
   }
+  .heroText h1 {
+    font-size: 1.6rem;
+  }
 
   .featured-number {
     font-size: 5rem;
@@ -599,5 +669,68 @@ a:hover {
   .reviews-image {
     width: 55px !important;
     height: 55px !important;
+  }
+}
+@media screen and (max-width: 375px) {
+  .heroText h1 {
+    font-size: 1.3rem;
+  }
+  .featured-number {
+    font-size: 4rem;
+  }
+  }
+.heroText p {
+    font-size: 14px;
+    text-align: left;
+  }
+  .heroText .custom-link{
+    font-size: 12px;
+    line-height: 10px;
+    padding: 8px 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+
+@media screen and (max-width: 320px) {
+  .heroText h1 {
+    font-size: 1.2rem;
+  }
+  .featured-number {
+    font-size: 3rem;
+  }
+  .heroText p{
+    font-size: 12;
+    text-align: left;
+  }
+  .featured-circle {
+    width: 180px;
+    height: 180px;
+  }
+}
+@media screen and (min-width: 992px) {
+  .hero {
+align-items: center;  }
+  .heroText {
+    position: absolute; 
+    top: 0;
+    left: 0; /* Align it to the left side */
+    height: 100%; /* Make it span the full height of the hero section */
+    width: 40%; /* Cover 40% of the width (adjust as needed) */
+    padding: 2rem; /* Add padding for spacing */
+    background: var(--section-bg-color); /* Optional: Add background for contrast */
+    color: var(--dark-color);
+    border-radius: 0px; /* Optional: Add rounded corners */
+    display: flex; /* Enable Flexbox */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: flex-start; /* Align items to the left horizontally */
+    z-index: 2; /* Ensure it appears above the image */
+    text-align: left; /* Ensure text is aligned to the left */
+  }
+
+  .hero .container {
+    position: relative;
+    height: 100%; 
+    width: 100%; 
   }
 }
